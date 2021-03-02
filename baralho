@@ -1,0 +1,169 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+    char valor;
+    char naipe;
+    int foiJogada;
+} Carta;
+
+typedef struct {
+    Carta vetor[54];
+} Baralho;
+
+void criaBaralho(Baralho *baralho) {
+    for (int i = 0; i < 54; i++) {
+        baralho->vetor[i].foiJogada = 0;
+    }
+    for (int i = 0; i <= 12; i++) {
+        baralho->vetor[i].naipe = 'P';
+    }
+    for (int i = 13; i <= 25; i++) {
+        baralho->vetor[i].naipe = 'O';
+    }
+    for (int i = 26; i <= 38; i++) {
+        baralho->vetor[i].naipe = 'C';
+    }
+    for (int i = 39; i <= 51; i++) {
+        baralho->vetor[i].naipe = 'E';
+    }
+    for (int i = 52; i <= 53; i++) {
+        baralho->vetor[i].naipe = '*';
+        baralho->vetor[i].valor = '*';
+    }
+    int i = 0;
+    while (i <= 12) {
+        baralho->vetor[0].valor = 'A';
+        baralho->vetor[1].valor = '2';
+        baralho->vetor[2].valor = '3';
+        baralho->vetor[3].valor = '4';
+        baralho->vetor[4].valor = '5';
+        baralho->vetor[5].valor = '6';
+        baralho->vetor[6].valor = '7';
+        baralho->vetor[7].valor = '8';
+        baralho->vetor[8].valor = '9';
+        baralho->vetor[9].valor = '1';
+        baralho->vetor[10].valor = 'R';
+        baralho->vetor[11].valor = 'D';
+        baralho->vetor[12].valor = 'V';
+        i++;
+    }
+    while (i <= 25) {
+        baralho->vetor[13].valor = 'A';
+        baralho->vetor[14].valor = '2';
+        baralho->vetor[15].valor = '3';
+        baralho->vetor[16].valor = '4';
+        baralho->vetor[17].valor = '5';
+        baralho->vetor[18].valor = '6';
+        baralho->vetor[19].valor = '7';
+        baralho->vetor[20].valor = '8';
+        baralho->vetor[21].valor = '9';
+        baralho->vetor[22].valor = '1';
+        baralho->vetor[23].valor = 'R';
+        baralho->vetor[24].valor = 'D';
+        baralho->vetor[25].valor = 'V';
+        i++;
+    }
+    while (i <= 38) {
+        baralho->vetor[26].valor = 'A';
+        baralho->vetor[27].valor = '2';
+        baralho->vetor[28].valor = '3';
+        baralho->vetor[29].valor = '4';
+        baralho->vetor[30].valor = '5';
+        baralho->vetor[31].valor = '6';
+        baralho->vetor[32].valor = '7';
+        baralho->vetor[33].valor = '8';
+        baralho->vetor[34].valor = '9';
+        baralho->vetor[35].valor = '1';
+        baralho->vetor[36].valor = 'R';
+        baralho->vetor[37].valor = 'D';
+        baralho->vetor[38].valor = 'V';
+        i++;
+    }
+    while (i <= 51) {
+        baralho->vetor[39].valor = 'A';
+        baralho->vetor[40].valor = '2';
+        baralho->vetor[41].valor = '3';
+        baralho->vetor[42].valor = '4';
+        baralho->vetor[43].valor = '5';
+        baralho->vetor[44].valor = '6';
+        baralho->vetor[45].valor = '7';
+        baralho->vetor[46].valor = '8';
+        baralho->vetor[47].valor = '9';
+        baralho->vetor[48].valor = '1';
+        baralho->vetor[49].valor = 'R';
+        baralho->vetor[50].valor = 'D';
+        baralho->vetor[51].valor = 'V';
+        i++;
+    }
+}
+
+int cartasRestantes(Baralho *baralho) {
+    int contador;
+    for (int i = 0; i < 54; i++) {
+        if (baralho->vetor[i].foiJogada = 0) {
+            contador++;
+        }
+    }
+    printf("Numero de cartas restantes: %d\n", contador);
+    return (contador);
+}
+
+void cartasNaoJogadas(Baralho *baralho) {
+    int j;
+    for (int i = 0; i < 54; i++) {
+        j = baralho->vetor[i].foiJogada;
+        if (j == 0) {
+            printf("Não jogada - Valor: |%c| Naipe: |%c|\n", baralho->vetor[i].valor, baralho->vetor[i].naipe);
+        }
+    }
+}
+
+Carta topo(Baralho *baralho) {
+    char s, n;
+    s = baralho->vetor[0].valor;
+    n = baralho->vetor[0].naipe;
+    printf("Topo - Valor: |%c| Naipe: |%c|\n", s, n);
+    return (baralho->vetor[0]);
+}
+
+Carta fundo(Baralho *baralho) {
+    char s, n;
+    s = baralho->vetor[53].valor;
+    n = baralho->vetor[53].naipe;
+    printf("Fundo - Valor: |%c| Naipe: |%c|\n", s, n);
+    return (baralho->vetor[53]);
+}
+
+void *carteado(Baralho *baralho) {
+    Carta array[3];
+    int j;
+    for (int i = 0; i < 54; i++) {
+        j = baralho->vetor[i].foiJogada;
+        if (j == 0) {
+            for(int a = 0; a < 3; a++){
+            array[a].valor = baralho->vetor[i].valor;
+            array[a].naipe = baralho->vetor[i].naipe;
+            array[a].foiJogada = baralho->vetor[i].foiJogada = 1;
+            }
+        }
+    }
+    for(int b = 0; b < 3; b++){
+        printf("Carta - Valor: |%c| Naipe: |%c|\n", array[b].valor, array[b].naipe);
+    }
+}
+
+int main(int argc, char** argv) {
+    Carta c;
+    Baralho *b;
+    criaBaralho(b);
+    cartasRestantes(b);
+    cartasNaoJogadas(b);
+    carteado(b);
+    topo(b);
+    fundo(b);
+    carteado(b);
+
+    return (EXIT_SUCCESS);
+}
+
